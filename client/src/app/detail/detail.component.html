@@ -1,0 +1,27 @@
+<div class="container" *ngIf="data$ | async as data">
+  
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><a [routerLink]="['/']">All cities</a></li>
+      <li class="is-active"><a aria-current="page">{{data.city.name}}</a></li>
+    </ul>
+  </nav>
+  <div class="columns weathers">
+    <div class="column card weather" *ngFor="let item of data.list">
+      <div class="card-content">
+        <div class="is-size-7">
+          {{item.dt*1000 | date:'dd MMM, EEEE'}}
+        </div>
+        <div class="has-text-weight-bold">{{item.dt * 1000 | date:'h:mm a'}}</div>
+        <div *ngFor="let weather of item.weather">
+            <img [src]="weather.icon | weatherImg" alt="">
+            <div class="is-size-7">{{weather.description}}</div>
+        </div>
+        <div class="is-size-4">{{item.main.temp - 273 | number:'1.0-0'}} C</div>
+      </div>
+    </div>
+  </div>
+  <app-forecast-chart [data]="data"></app-forecast-chart>
+</div>
+
+

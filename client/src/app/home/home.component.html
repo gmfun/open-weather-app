@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="columns">
+      <div class="card city" *ngFor="let item of data">
+        <div class="card-content">
+          <div class="is-size-4 has-text-weight-bold">{{item.name}}</div>
+            <div class="is-size-4">{{item.main.temp - 273 | number:'1.0-0'}} C</div>
+            <div class="columns">
+                <div *ngFor="let weather of item.weather" class="column">
+                    <div class="is-size-7">{{weather.description}}</div>
+                    <img [src]="weather.icon | weatherImg" alt="">
+                </div>
+            </div>
+            
+            <a [routerLink]="['/forecast', item.id]"><button class="button">Forecast</button></a>
+        </div>
+         
+      </div>
+  </div>
+  
+</div>
